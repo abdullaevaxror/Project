@@ -45,34 +45,51 @@
             <div class="row g-3 align-items-center">
                 <div class="col-md-5">
                     <label for="amount" class="form-label visually-hidden">Amount</label>
-                    <input type="number" id="amount" class="form-control" placeholder="Amount" value="10000">
+                    <input type="number" id="amount" class="form-control" placeholder="Amount" value="10000" name="amount">
                 </div>
                 <div class="col-md-3 text-center">
-                    <select class="form-select">
+                    <select class="form-select" name="from">
                         <?php
-                        foreach ($currencies as $key => $currency){
+                        global $currencies;
+
+                        foreach ($currencies as $key => $currencyy){
                             echo '<option value="' . $key . '"> '. $key . '</option>';
                         }
                         ?>
-                        <option>USD</option>    
+                        <option value="UZS">UZS </option>
                     </select>
                 </div>
                 <div class="col-md-1 text-center">
                     <span>⇆</span>
                 </div>
                 <div class="col-md-3">
-                    <select class="form-select">
+                    <select class="form-select" name="to">
+                        <option value="UZS">UZS </option>
                     <?php
                         global $currencies;
 
-                        foreach ($currencies as $key => $currency) {
+                        foreach ($currencies as $key => $currencyy) {
                             echo '<option value="' . $key . '"> '. $key .' </option>';
                         }
                         ?>
                     </select>
                 </div>
             </div>
-            <p class="rate-info mt-2">1.00 USD = 12,862.73 UZS <i class="bi bi-info-circle"></i></p>
+            <p class="rate-info mt-2">
+                <?php
+                if (isset($_GET['amount']) && isset($_GET['from'])) {
+                    if ($_GET['from'] == "UZS") {
+
+                        echo $_GET['amount'] / $currency->getCurrencies()[$_GET['to']];
+                    }elseif ($_GET['to'] == "UZS") {
+                        echo $_GET['amount'] * $currency->getCurrencies()[$_GET['from']];
+
+                    }else{
+                        echo "Ikkalasidan bittasi UZS";
+                    }
+                }
+                ?>
+                <i class="bi bi-info-circle"></i></p>
             <button type="submit" class="btn btn-primary btn-primary-custom mt-3">Convert</button>
         </form>
     </div>
