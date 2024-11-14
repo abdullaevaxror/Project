@@ -1,6 +1,6 @@
 <?php
 
-class Currency{
+class  Currency{
 
     const CURRENCY_API_URL = "https://cbu.uz/uz/arkhiv-kursov-valyut/json/";
     public array $currencies = [];
@@ -28,7 +28,7 @@ class Currency{
 
     public function exchange($value, $currency_name='USD') {
 
-        echo ceil($value / $this->getCurrencies()[$currency_name]) . ' ' . $currency_name;
+        echo ceil($value / $this->getCurrencies()[$currency_name]) . ' currency.php' . $currency_name;
         
     }
 }
