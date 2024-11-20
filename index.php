@@ -1,8 +1,12 @@
+
 <?php
-require "src/currency.php";
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+
+
+require 'src/Currency.php';
 
 $currency = new Currency();
 
-$currencies = $currency->getCurrencies();
-
-require "resources/currency-converter.php";
+require 'resources/views/currency-converter.php';
