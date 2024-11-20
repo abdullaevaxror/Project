@@ -26,7 +26,7 @@ class Currency{
     }
     public function exchange (string $from,string $to, int $amount) {
         if ($from == $to){
-            return "Ikki valyuta har xil bo'lishi kerak";
+            return "Ikki valyuta har xil bo'lishi kere";
         }
         if ($from == 'UZS'){
             return $amount / (int)$this->getCurrencies()[$to];

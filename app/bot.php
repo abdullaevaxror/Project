@@ -3,20 +3,22 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
 require 'src/Bot.php';
-require 'src/Currency.php';
+require 'src/currency.php';
 
 $bot = new Bot();
 $currency = new Currency();
 
 $update = json_decode(file_get_contents('php://input'));
-
+var_dump($update);
+if (isset($update)) {
 $text = $update->message->text;
 $from_id = $update->message->from->id;
+
 
 if ($text == '/start') {
     $response = $bot->makeRequest('sendMessage', [
         'chat_id' => $from_id,
-        'text'=>"Hello World! <a href='https://core.telegram.org/bots/api#message'> dcndsjcjsd<a>",
+        'text'=>"Hello World! <a href='https://core.telegram.org/bots/api#message'>dcndsjcjsd<a>",
         'parse_mode' => 'html'
     ]);
 
@@ -38,4 +40,5 @@ if ($text == '/currency') {
         'chat_id' => $from_id,
         'text'=>$currency_list,
     ]);
+}
 }
