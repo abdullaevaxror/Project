@@ -10,7 +10,6 @@ $currency = new Currency();
 
 $update = json_decode(file_get_contents('php://input'));
 var_dump($update);
-if (isset($update)) {
 $text = $update->message->text;
 $from_id = $update->message->from->id;
 
@@ -40,5 +39,4 @@ if ($text == '/currency') {
         'chat_id' => $from_id,
         'text'=>$currency_list,
     ]);
-}
 }
