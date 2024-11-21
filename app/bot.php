@@ -4,9 +4,11 @@ ini_set('display_startup_errors', 1);
 
 require 'src/Bot.php';
 require 'src/currency.php';
+require 'src/Weather.php';
 
 $bot = new Bot();
 $currency = new Currency();
+$weather = new Weather();
 
 $update = json_decode(file_get_contents('php://input'));
 var_dump($update);
@@ -14,6 +16,7 @@ var_dump($update);
 if (isset($update)) {
     $text = $update->message->text;
     $from_id = $update->message->from->id;
+
     if ($text == '/start') {
         $response = $bot->makeRequest('sendMessage', [
             'chat_id' => $from_id,
@@ -28,6 +31,17 @@ if (isset($update)) {
             ]);
         }
     }
+
+    if ($text == '/weather'){
+        $weather2 = $weather->getWeather();
+//        $weather2->temp;
+//        var_dump($weather2);
+        $bot->makeRequest('sendMessage', [
+            'chat_id' => $from_id,
+            'text' => "Ma'lumotlar: $weather2",
+        ]);
+    }
+
     if ($text == '/currency') {
         $currencies = $currency->getCurrencies();
 
@@ -39,5 +53,6 @@ if (isset($update)) {
             'chat_id' => $from_id,
             'text' => $currency_list,
         ]);
-}
+
+    }
 }
